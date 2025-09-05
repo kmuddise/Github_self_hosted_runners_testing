@@ -1,6 +1,5 @@
 name: Simple CI
 
-# Run workflow on every push or pull request to main
 on:
   push:
     branches: [ main ]
@@ -9,7 +8,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest   # GitHub-hosted runner (Linux VM)
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -25,6 +24,10 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Run tests
+      - name: Verify pytest installation
         run: |
-          if [ -f test_app.py ]; then pytest -q; else echo "No tests found"; fi
+          which pytest
+          pytest --version
+
+      - name: Run tests
+        run: pytest -v
