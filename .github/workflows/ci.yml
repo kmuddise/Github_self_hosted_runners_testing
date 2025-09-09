@@ -1,4 +1,4 @@
-name: Simple CI
+name: Testing Pipeline 1
 
 on:
   push:
